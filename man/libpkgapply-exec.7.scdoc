@@ -1,0 +1,39 @@
+libpkgapply-exec(7)
+
+# NAME
+
+libpkgapply-exec - exact package lifecycle execution adapter
+
+# DESCRIPTION
+
+*libpkgapply-exec* derives exact lifecycle nodes from one sealed
+*libpkgapply* application request and executes one caller-selected node through
+an injected *libpkgexec* backend.
+
+Incoming installation nodes come from the exact source snapshot retained by the
+incoming build. Installed removal nodes come only from durable historical
+control in the accepted plan. Historically unavailable control is refused.
+
+The returned node vector is canonical identity order and is not a transaction
+schedule. The caller owns ordering relative to application, publication, other
+nodes, and failure continuation.
+
+# EXECUTION VIEW
+
+The caller supplies an execution root containing the interpreter, exact native
+numeric credentials, and a separate managed target root. The target is mounted writable at */target*. Networking is
+denied, stdin is closed, stdout and stderr are captured completely, and the
+environment is closed.
+
+Version 0.1 executes only *text/x-posix-shell* lifecycle material, applies no
+resource limits, and disables cancellation.
+
+# EXCLUSIONS
+
+The library does not apply filesystem plans, publish installed state, acquire
+the outer target lease, resolve dependencies, choose transaction order, or
+construct a Linux backend.
+
+# SEE ALSO
+
+*libpkgapply*(3), *libpkgexec*(3), *pkgexec_request*(3)

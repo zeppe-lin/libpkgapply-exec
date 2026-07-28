@@ -31,3 +31,4 @@ subdir('src')
 if not get_option('tests').disabled()
   subdir('tests')
 endif
+subdir('man')
