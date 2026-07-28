@@ -27,3 +27,7 @@ libpkgexec_dep = dependency(
 )
 pkgconf = import('pkgconfig')
 subdir('src')
+
+if not get_option('tests').disabled()
+  subdir('tests')
+endif
