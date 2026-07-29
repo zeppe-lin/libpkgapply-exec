@@ -12,7 +12,7 @@ public_deps = [libpkgapply_dep, libpkgexec_dep]
 libpkgapply_exec = library(
   'pkgapply-exec', ['error.cpp', 'model.cpp', 'derive.cpp', 'executor.cpp'],
   include_directories: public_inc, dependencies: public_deps,
-  install: true, version: meson.project_version(), soversion: '0',
+  install: true, version: meson.project_version(), soversion: '1',
 )
 libpkgapply_exec_dep = declare_dependency(
   link_with: libpkgapply_exec, include_directories: public_inc, dependencies: public_deps,
@@ -22,5 +22,5 @@ install_headers(public_headers, subdir: 'libpkgapply-exec')
 pkgconf.generate(
   libpkgapply_exec, name: 'libpkgapply-exec', filebase: 'libpkgapply-exec',
   description: 'Exact package lifecycle execution adapter', subdirs: '.',
-  requires: ['libpkgapply >= 1.0.0', 'libpkgexec >= 1.2.0'],
+  requires: ['libpkgapply >= 2.0.0', 'libpkgexec >= 1.3.0'],
 )

@@ -2,9 +2,9 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 project(
   'libpkgapply-exec', 'cpp',
-  version: '0.1.0',
+  version: '1.0.0',
   license: 'GPL-3.0-or-later',
-  meson_version: '>=1.2.0',
+  meson_version: '>=1.3.0',
   default_options: ['cpp_std=c++17', 'warning_level=3', 'default_library=shared', 'b_ndebug=if-release'],
 )
 
@@ -18,11 +18,11 @@ if (library_kind == 'static') != want_static
 endif
 
 libpkgapply_dep = dependency(
-  'libpkgapply', version: '>=1.0.0', required: true, static: want_static,
+  'libpkgapply', version: '>=2.0.0', required: true, static: want_static,
   fallback: ['libpkgapply', 'libpkgapply_dep'],
 )
 libpkgexec_dep = dependency(
-  'libpkgexec', version: '>=1.2.0', required: true, static: want_static,
+  'libpkgexec', version: '>=1.3.0', required: true, static: want_static,
   fallback: ['libpkgexec', 'libpkgexec_dep'],
 )
 pkgconf = import('pkgconfig')

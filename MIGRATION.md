@@ -14,3 +14,9 @@ This is the first release. Callers must:
 
 Lifecycle programs see the managed target at `/target` and receive the
 `ZEPPE_LIN_*` closed-environment variables documented in `DESIGN.md`.
+
+## 0.1.0 to 1.0.0
+
+Rebuild every consumer against `libpkgapply 2.0.0`. The lifecycle node model is
+semantically unchanged, but admitted sessions retain complete application
+requests by value and therefore cross an ABI boundary.
