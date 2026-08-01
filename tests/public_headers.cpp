@@ -5,4 +5,5 @@
 #include <libpkgapply-exec/derive.h>
 #include <libpkgapply-exec/executor.h>
 #include <libpkgapply-exec/libpkgapply-exec.h>
+#include <libpkgapply-exec/result_codec.h>
 int main(){return 0;}
