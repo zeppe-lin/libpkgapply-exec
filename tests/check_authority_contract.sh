@@ -31,3 +31,7 @@ if grep -R -E 'pkgapply::apply\(|pkgstate|system\(|popen\(|execl?p?\(' "$root/in
   echo 'application, state, or external utility authority entered lifecycle adapter' >&2
   exit 1
 fi
+
+# Durable decoding remains evidence-only.
+grep -q 'admitted_lifecycle_session session' "$root/include/libpkgapply-exec/result_codec.h"
+! grep -E 'pkgapply::apply\(|pkgstate|system\(|popen\(|execl?p?\(' "$root/src/result_codec.cpp" >/dev/null
