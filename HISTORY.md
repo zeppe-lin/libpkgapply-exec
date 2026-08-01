@@ -1,5 +1,13 @@
 # History
 
+## 1.1.0 — 2026-08-02
+
+- Added the canonical version-1 durable codec for lifecycle execution results.
+- Embedded exact `libpkgexec 1.4.0` execution evidence without duplicating its schema.
+- Required the complete admitted lifecycle session and backend profile during decode.
+- Derived the exact execution request through a pure path that performs no resource preparation or filesystem access.
+- Added corruption, truncation, node/session/backend substitution, canonical round-trip, and Meson-source-path qualification.
+
 ## 1.0.0 — 2026-07-29
 
 - Rebuilt lifecycle execution sessions against `libpkgapply 2.0.0` and

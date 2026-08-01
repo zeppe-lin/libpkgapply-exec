@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 project(
   'libpkgapply-exec', 'cpp',
-  version: '1.0.0',
+  version: '1.1.0',
   license: 'GPL-3.0-or-later',
   meson_version: '>=1.3.0',
   default_options: ['cpp_std=c++17', 'warning_level=3', 'default_library=shared', 'b_ndebug=if-release'],

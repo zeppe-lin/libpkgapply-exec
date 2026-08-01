@@ -1,4 +1,4 @@
-# libpkgapply-exec 1.0.0
+# libpkgapply-exec 1.1.0
 
 `libpkgapply-exec` is the backend-neutral package lifecycle execution adapter
 for Zeppe-Lin. It projects exact lifecycle nodes from one sealed
