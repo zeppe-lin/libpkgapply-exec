@@ -7,3 +7,8 @@ the native authority.
 
 Patch series should apply with `git am`, keep commits independently reviewable,
 and include exact qualification results.
+
+Codec changes must prove canonical round trips, corruption and truncation
+refusal, exact session and backend substitution refusal, and a filesystem-free
+decode path. Every Meson-referenced source and manual path must be checked
+explicitly when Meson is unavailable during qualification.

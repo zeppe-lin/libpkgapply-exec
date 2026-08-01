@@ -125,3 +125,30 @@ The library does not:
 - grant network access;
 - claim recovery or rollback for lifecycle-created side effects;
 - depend on `libpkgexec-linux`.
+
+## Durable lifecycle-execution evidence
+
+The durable record belongs to this adapter because it binds one exact lifecycle
+node to the corresponding `libpkgexec` process evidence. The record embeds the
+canonical `libpkgexec 1.4` execution-result encoding and adds only
+adapter-owned identities.
+
+The record does not serialize an application request, lifecycle node, admitted
+session, execution request, backend profile, host path, credential policy,
+resource materialization, or backend semantics. Decode requires the exact
+`admitted_lifecycle_session` and `pkgexec::backend_capability_profile` bodies
+from their owning authorities. Identity strings alone are not rehydration
+authority.
+
+Decode derives the exact execution request from the admitted session through a
+pure internal projection. It does not call `prepare()`, create a session root,
+inspect the execution or target roots, change ownership, construct execution
+resources, invoke a backend, or otherwise touch the filesystem. The embedded
+execution record must reopen under that derived request and the supplied
+backend profile.
+
+The retained lifecycle-result identity is recomputed from the exact node and
+execution-evidence identities. Every accepted record is re-encoded and must
+reproduce its original bytes. Diagnostic prose remains subordinate
+`libpkgexec` evidence and is protected by the nested and whole-record
+checksums.

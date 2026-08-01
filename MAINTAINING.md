@@ -26,3 +26,9 @@ Before tagging:
 Review public dependency metadata, SONAME, generated manuals, installed-header
 consumers, and the authority-contract test. Keep diagnostics and host paths out
 of semantic identities.
+
+Durable evidence codecs may embed canonical records from subordinate owners,
+but must require complete semantic authority bodies from the caller rather
+than reconstruct them from identity strings. Lifecycle decoding must derive the
+execution request purely from the admitted session and must not call resource
+preparation or touch host paths.

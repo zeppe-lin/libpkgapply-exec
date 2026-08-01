@@ -28,6 +28,14 @@ environment is closed.
 Version 0.1 executes only *text/x-posix-shell* lifecycle material, applies no
 resource limits, and disables cancellation.
 
+# DURABLE EVIDENCE
+
+The versioned lifecycle-execution codec retains the exact *libpkgexec*
+execution record and binds it to the exact lifecycle node. Decode requires the
+complete admitted lifecycle session and backend profile. It derives the
+execution request without preparing resources, invoking a backend, or touching
+the filesystem.
+
 # EXCLUSIONS
 
 The library does not apply filesystem plans, publish installed state, acquire

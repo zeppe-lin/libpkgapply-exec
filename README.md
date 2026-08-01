@@ -23,3 +23,11 @@ meson test -C build --print-errorlogs
 ```
 
 Shared and static dependency closures are separate builds. See `TESTING.md`.
+
+## Durable evidence
+
+`libpkgapply-exec` provides a versioned canonical codec for
+`lifecycle_execution_result`. It embeds `libpkgexec`'s execution-result record
+and binds it to the exact lifecycle node. Decode requires the complete admitted
+lifecycle session and backend profile; it derives the execution request without
+preparing resources or touching the filesystem.
