@@ -14,6 +14,9 @@ std::string_view to_string(error_code value) noexcept {
     case error_code::invalid_execution_identity: return "invalid-execution-identity";
     case error_code::resource_preparation_failed: return "resource-preparation-failed";
     case error_code::backend_contract_violation: return "backend-contract-violation";
+    case error_code::inconsistent_result: return "inconsistent-result";
+    case error_code::corrupt_encoding: return "corrupt-encoding";
+    case error_code::authority_mismatch: return "authority-mismatch";
   }
   return "unknown";
 }

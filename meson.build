@@ -22,7 +22,7 @@ libpkgapply_dep = dependency(
   fallback: ['libpkgapply', 'libpkgapply_dep'],
 )
 libpkgexec_dep = dependency(
-  'libpkgexec', version: '>=1.3.0', required: true, static: want_static,
+  'libpkgexec', version: '>=1.4.0', required: true, static: want_static,
   fallback: ['libpkgexec', 'libpkgexec_dep'],
 )
 pkgconf = import('pkgconfig')

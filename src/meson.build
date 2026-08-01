@@ -6,11 +6,12 @@ public_headers = files(
   '../include/libpkgapply-exec/model.h',
   '../include/libpkgapply-exec/derive.h',
   '../include/libpkgapply-exec/executor.h',
+  '../include/libpkgapply-exec/result_codec.h',
   '../include/libpkgapply-exec/libpkgapply-exec.h',
 )
 public_deps = [libpkgapply_dep, libpkgexec_dep]
 libpkgapply_exec = library(
-  'pkgapply-exec', ['error.cpp', 'model.cpp', 'derive.cpp', 'executor.cpp'],
+  'pkgapply-exec', ['error.cpp', 'model.cpp', 'derive.cpp', 'executor.cpp', 'result_codec.cpp'],
   include_directories: public_inc, dependencies: public_deps,
   install: true, version: meson.project_version(), soversion: '1',
 )
@@ -22,5 +23,5 @@ install_headers(public_headers, subdir: 'libpkgapply-exec')
 pkgconf.generate(
   libpkgapply_exec, name: 'libpkgapply-exec', filebase: 'libpkgapply-exec',
   description: 'Exact package lifecycle execution adapter', subdirs: '.',
-  requires: ['libpkgapply >= 2.0.0', 'libpkgexec >= 1.3.0'],
+  requires: ['libpkgapply >= 2.0.0', 'libpkgexec >= 1.4.0'],
 )

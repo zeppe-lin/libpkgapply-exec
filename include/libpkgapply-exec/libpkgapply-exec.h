@@ -5,3 +5,4 @@
 #include <libpkgapply-exec/model.h>
 #include <libpkgapply-exec/derive.h>
 #include <libpkgapply-exec/executor.h>
+#include <libpkgapply-exec/result_codec.h>

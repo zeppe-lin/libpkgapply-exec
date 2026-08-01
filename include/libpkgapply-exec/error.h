@@ -15,6 +15,9 @@ enum class error_code {
   invalid_execution_identity,
   resource_preparation_failed,
   backend_contract_violation,
+  inconsistent_result,
+  corrupt_encoding,
+  authority_mismatch,
 };
 [[nodiscard]] std::string_view to_string(error_code value) noexcept;
 class error final : public std::runtime_error {
