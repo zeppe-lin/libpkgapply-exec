@@ -1,12 +1,21 @@
 # SPDX-FileCopyrightText: 2026 Alexandr Savca
 # SPDX-License-Identifier: GPL-3.0-or-later
-lifecycle_test = executable('lifecycle-test', 'lifecycle_test.cpp', dependencies: libpkgapply_exec_dep)
+fixture_test_deps = [
+  libpkgapply_exec_dep,
+  dependency('libpkgbuild-image', version: ['>=1.0.0', '<2.0.0'], required: true, static: want_static),
+  dependency('libpkgbuild-plan', version: ['>=1.0.0', '<2.0.0'], required: true, static: want_static),
+  dependency('libpkgcatalog', version: ['>=3.0.0', '<4.0.0'], required: true, static: want_static),
+  dependency('libpkgresolve', version: ['>=2.0.0', '<3.0.0'], required: true, static: want_static),
+  dependency('libpkgstate', version: ['>=3.0.0', '<4.0.0'], required: true, static: want_static),
+]
+
+lifecycle_test = executable('lifecycle-test', 'lifecycle_test.cpp', dependencies: fixture_test_deps)
 test('lifecycle authority', lifecycle_test)
 
 codec_test = executable(
   'result-codec-test',
   'result_codec_test.cpp',
-  dependencies: libpkgapply_exec_dep,
+  dependencies: fixture_test_deps,
 )
 test('durable lifecycle evidence codec', codec_test)
 

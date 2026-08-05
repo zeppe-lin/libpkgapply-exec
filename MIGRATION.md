@@ -17,7 +17,7 @@ Lifecycle programs see the managed target at `/target` and receive the
 
 ## 0.1.0 to 1.0.0
 
-Rebuild every consumer against `libpkgapply 2.0.0`. The lifecycle node model is
+Rebuild every consumer against `libpkgapply 3.0.0`. The lifecycle node model is
 semantically unchanged, but admitted sessions retain complete application
 requests by value and therefore cross an ABI boundary.
 
@@ -27,3 +27,10 @@ Version 1 records introduced after 1.0.0 are new controller evidence, not a
 conversion of legacy lifecycle logs. There is no importer for ad-hoc script
 output or transaction journals. Callers must retain the exact admitted
 lifecycle session and backend profile authorities needed for decoding.
+
+## 1.1.0 to 2.0.0
+
+Rebuild every consumer. `admitted_lifecycle_session` retains the corrected
+`libpkgapply 3.0.0` application request by value, so the loader ABI advances to
+`libpkgapply-exec.so.2`. Lifecycle-node and result-record protocols remain at
+generation 1; no durable lifecycle record format changed.

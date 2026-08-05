@@ -1,5 +1,12 @@
 # History
 
+## 2.0.0 — 2026-08-05
+
+- Rebuilt admitted lifecycle sessions against the corrected opaque `libpkgapply 3.0.0` application-request ABI.
+- Advanced the SONAME to `libpkgapply-exec.so.2`; the public session retains the application request by value.
+- Qualified lifecycle derivation against resolver-backed build authority and the standalone build-image and build-plan boundaries.
+- Preserved lifecycle-node and durable execution-evidence protocols at their first deployed generation.
+
 ## 1.1.0 — 2026-08-02
 
 - Added the canonical version-1 durable codec for lifecycle execution results.
@@ -10,7 +17,7 @@
 
 ## 1.0.0 — 2026-07-29
 
-- Rebuilt lifecycle execution sessions against `libpkgapply 2.0.0` and
+- Rebuilt lifecycle execution sessions against `libpkgapply 3.0.0` and
   `libpkgexec 1.3.0`.
 - Advanced the SONAME to `libpkgapply-exec.so.1` because
   `admitted_lifecycle_session` embeds the changed application request by value.
