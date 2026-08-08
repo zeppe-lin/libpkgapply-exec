@@ -13,8 +13,10 @@ The test suite proves:
 - unrepresentable or non-canonical numeric credentials are refused;
 - execution requests use lifecycle purpose, denied networking, exact target
   mounting, fixed credentials, and complete capture;
-- backend failure evidence is retained, foreign evidence is refused, and
-  backend exceptions are rejected.
+- backend failure evidence is retained; foreign request or backend-profile
+  evidence is refused; capability and execution exceptions, including
+  non-standard exceptions, are rejected;
+- backend capability observation occurs before lifecycle scratch mutation.
 
 Run both dependency closures:
 

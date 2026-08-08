@@ -103,9 +103,12 @@ These variables are execution policy, not ambient inheritance.
 
 ## Evidence and failure
 
-The adapter catches backend exceptions and classifies them as backend-contract
-violations. Returned evidence must belong to the exact prepared request.
-Successful lifecycle evidence is only successful `libpkgexec` evidence; a
+Before effectful preparation, execution snapshots the backend capability profile.
+Exceptions from capability observation or execution, including non-standard
+exceptions, are translated to `backend_contract_violation`. Returned evidence
+must belong to both the exact prepared request and the exact capability profile
+advertised before preparation. Successful lifecycle evidence is only successful
+`libpkgexec` evidence; a
 nonzero exit, signal, unsupported backend, cleanup failure, or capture failure
 remains failed.
 

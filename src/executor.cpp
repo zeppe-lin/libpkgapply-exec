@@ -29,6 +29,35 @@ void own(const fs::path& path,const lifecycle_execution_identity& identity) {
     throw error(error_code::resource_preparation_failed,"cannot assign lifecycle writable resource ownership: "+std::string(std::strerror(errno)));
 }
 std::string action_text(pkgsource::lifecycle_action action) { return std::string(pkgsource::to_string(action)); }
+
+pkgexec::backend_capability_profile backend_capabilities(
+    pkgexec::execution_backend& backend) {
+  try {
+    return backend.capabilities();
+  } catch (const std::exception& value) {
+    throw error(error_code::backend_contract_violation,
+                std::string("execution backend capability query threw: ") +
+                    value.what());
+  } catch (...) {
+    throw error(error_code::backend_contract_violation,
+                "execution backend capability query threw a non-standard exception");
+  }
+}
+
+pkgexec::execution_result invoke_backend(
+    pkgexec::execution_backend& backend,
+    const prepared_execution& prepared) {
+  try {
+    return backend.execute(prepared.request, prepared.resources);
+  } catch (const std::exception& value) {
+    throw error(error_code::backend_contract_violation,
+                std::string("execution backend threw instead of returning evidence: ") +
+                    value.what());
+  } catch (...) {
+    throw error(error_code::backend_contract_violation,
+                "execution backend threw a non-standard exception instead of returning evidence");
+  }
+}
 }
 namespace detail {
 pkgexec::resource_identity managed_target_resource_identity(const lifecycle_node& node) {
@@ -105,15 +134,13 @@ prepared_execution prepare(const admitted_lifecycle_session& session) {
   return {std::move(request),std::move(resources),temporary};
 }
 lifecycle_execution_result execute(const admitted_lifecycle_session& session,pkgexec::execution_backend& backend) {
+  const auto advertised_backend=backend_capabilities(backend);
   auto prepared=prepare(session);
-  pkgexec::execution_result evidence=[&] {
-    try { return backend.execute(prepared.request,prepared.resources); }
-    catch (const std::exception& value) {
-      throw error(error_code::backend_contract_violation,std::string("execution backend threw instead of returning evidence: ")+value.what());
-    }
-  }();
+  auto evidence=invoke_backend(backend,prepared);
   if (evidence.request()!=prepared.request)
     throw error(error_code::backend_contract_violation,"execution backend returned evidence for another request");
+  if (evidence.backend()!=advertised_backend)
+    throw error(error_code::backend_contract_violation,"execution backend returned evidence for another backend profile");
   return detail::executor_access::make(session.node(),std::move(evidence));
 }
 } // namespace pkgapply_exec
