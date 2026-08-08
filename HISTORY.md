@@ -6,6 +6,8 @@
 - Advanced the SONAME to `libpkgapply-exec.so.2`; the public session retains the application request by value.
 - Qualified lifecycle derivation against resolver-backed build authority and the standalone build-image and build-plan boundaries.
 - Preserved lifecycle-node and durable execution-evidence protocols at their first deployed generation.
+- Bound runtime evidence to the backend capability profile observed before lifecycle resource preparation and translated standard/non-standard backend throws into adapter-owned contract failures.
+- Split qualification into unit, integration, protocol, standalone-header, and static-contract roles.
 
 ## 1.1.0 — 2026-08-02
 

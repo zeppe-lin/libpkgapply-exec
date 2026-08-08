@@ -18,7 +18,6 @@
 #include <libpkgbuild-plan/libpkgbuild-plan.h>
 #include <libpkgcatalog/libpkgcatalog.h>
 #include <libpkgresolve/libpkgresolve.h>
-#include <libpkgsource-plan/adapter.h>
 #include <libpkgstate/libpkgstate.h>
 #include <libpkgplan/install.h>
 #include <libpkgplan/remove.h>

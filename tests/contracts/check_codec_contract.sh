@@ -9,7 +9,7 @@ for path in \
   include/libpkgapply-exec/result_codec.h \
   src/execution_request.h \
   src/result_codec.cpp \
-  tests/result_codec_test.cpp
+  tests/protocol/result_codec_roundtrip_test.cpp
  do
   test -f "$root/$path"
  done
@@ -24,7 +24,8 @@ grep -Fq 'pkgexec::decode_execution_result' "$root/src/result_codec.cpp"
 grep -Fq 'detail::lifecycle_execution_request(session)' \
   "$root/src/result_codec.cpp"
 grep -Fq 'detail::model_access::result' "$root/src/result_codec.cpp"
-grep -Fq "'result_codec_test.cpp'" "$root/tests/meson.build"
+grep -Fq "'protocol/result_codec_roundtrip_test.cpp'" "$root/tests/meson.build"
+grep -Fq "'protocol/result_codec_refusal_test.cpp'" "$root/tests/meson.build"
 grep -Fq 'libpkgexec >= 1.4.0' "$root/src/meson.build"
 grep -Fq 'maximum_lifecycle_execution_result_encoding_size' \
   "$root/include/libpkgapply-exec/result_codec.h"
