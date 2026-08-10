@@ -3,7 +3,7 @@
 
 private_execution_request_test_support = static_library(
   'pkgapply-exec-test-execution-request',
-  '../src/executor.cpp',
+  '../src/execution_request.cpp',
   include_directories: public_inc,
   dependencies: public_deps,
 )

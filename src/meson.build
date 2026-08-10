@@ -26,7 +26,7 @@ public_headers = files(
 )
 public_deps = [libpkgapply_dep, libpkgexec_dep]
 libpkgapply_exec = library(
-  'pkgapply-exec', ['error.cpp', 'model.cpp', 'derive.cpp', 'executor.cpp', 'result_codec.cpp'],
+  'pkgapply-exec', ['error.cpp', 'model.cpp', 'derive.cpp', 'execution_request.cpp', 'executor.cpp', 'result_codec.cpp'],
   include_directories: public_inc, dependencies: public_deps,
   link_args: library_link_args, link_depends: library_link_depends,
   install: true, version: meson.project_version(), soversion: '2',

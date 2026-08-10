@@ -15,6 +15,7 @@ for path in \
   src/model.cpp \
   src/derive.cpp \
   src/executor.cpp \
+  src/execution_request.cpp \
   src/execution_request.h \
   src/result_codec.cpp \
   tests/fixtures/application.h \

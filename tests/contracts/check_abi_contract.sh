@@ -14,6 +14,10 @@ manifest=$root/abi/libpkgapply-exec.exports
   fail 'private detail namespace entered public ABI manifest'
 grep -F "private_execution_request_test_support = static_library(" "$root/tests/meson.build" >/dev/null ||
   fail 'white-box execution-request tests lack private implementation support'
+grep -F "'../src/execution_request.cpp'" "$root/tests/meson.build" >/dev/null ||
+  fail 'white-box execution-request tests do not link the private request-projection leaf'
+! grep -F "'../src/executor.cpp'" "$root/tests/meson.build" >/dev/null ||
+  fail 'white-box execution-request tests link the non-leaf executor implementation'
 grep -F "name == 'request-projection' or name == 'backend-contract'" "$root/tests/meson.build" >/dev/null ||
   fail 'private execution-request linkage is not scoped to the two white-box tests'
 ! grep -E '^_ZNSt|^_ZN9__gnu_cxx' "$manifest" >/dev/null ||

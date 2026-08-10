@@ -6,6 +6,7 @@ root=$1
 model=$root/include/libpkgapply-exec/model.h
 derive=$root/src/derive.cpp
 executor=$root/src/executor.cpp
+request_projection=$root/src/execution_request.cpp
 meson=$root/meson.build
 
 grep -q 'pkgapply::package_application_request' "$model"
@@ -19,10 +20,10 @@ grep -q 'plan().inputs().control()' "$derive"
 grep -q 'is_known(control.completeness().removal_lifecycle)' "$derive"
 grep -q 'text/x-posix-shell' "$derive"
 
-grep -q 'resource_role::managed_target_root' "$executor"
-grep -q 'logical_path::parse("/target")' "$executor"
-grep -q 'network_policy::denied' "$executor"
-grep -q 'execution_purpose::lifecycle' "$executor"
+grep -q 'resource_role::managed_target_root' "$request_projection"
+grep -q 'logical_path::parse("/target")' "$request_projection"
+grep -q 'network_policy::denied' "$request_projection"
+grep -q 'execution_purpose::lifecycle' "$request_projection"
 grep -q 'backend.capabilities()' "$executor"
 grep -q 'execution backend returned evidence for another request' "$executor"
 grep -q 'execution backend returned evidence for another backend profile' "$executor"
