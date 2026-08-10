@@ -13,7 +13,7 @@ fixture_test_deps = [
   dependency('libpkgbuild-image', version: ['>=1.0.0', '<2.0.0'], required: true, static: want_static),
   dependency('libpkgbuild-plan', version: ['>=1.0.0', '<2.0.0'], required: true, static: want_static),
   dependency('libpkgcatalog', version: ['>=3.0.0', '<4.0.0'], required: true, static: want_static),
-  dependency('libpkgresolve', version: ['>=2.0.0', '<3.0.0'], required: true, static: want_static),
+  dependency('libpkgresolve', version: ['>=3.0.0', '<4.0.0'], required: true, static: want_static),
   dependency('libpkgstate', version: ['>=3.0.0', '<4.0.0'], required: true, static: want_static),
 ]
 
