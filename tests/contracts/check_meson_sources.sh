@@ -31,11 +31,18 @@ for path in \
   tests/protocol/result_codec_roundtrip_test.cpp \
   tests/protocol/result_codec_refusal_test.cpp \
   tests/header/public_header_test.cpp \
+  tests/installed/consumer.cpp \
+  tests/contracts/check_abi_contract.sh \
+  tests/contracts/check_abi_surface.sh \
+  tests/contracts/check_ci_contract.sh \
   tests/contracts/check_authority_contract.sh \
   tests/contracts/check_codec_contract.sh \
   tests/contracts/check_meson_sources.sh \
   tests/contracts/check_release_metadata.sh \
   tests/contracts/check_test_layout.sh \
+  abi/libpkgapply-exec.exports \
+  tools/generate-elf-export-script.sh \
+  ci/audit-shared-boundary.sh \
   ci/qualify.sh \
   man/libpkgapply-exec.7.scdoc \
   man/libpkgapply_exec_result_codec.3.scdoc

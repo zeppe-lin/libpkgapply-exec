@@ -8,6 +8,8 @@
 - Preserved lifecycle-node and durable execution-evidence protocols at their first deployed generation.
 - Bound runtime evidence to the backend capability profile observed before lifecycle resource preparation and translated standard/non-standard backend throws into adapter-owned contract failures.
 - Split qualification into unit, integration, protocol, standalone-header, and static-contract roles.
+- Froze the pre-release generation-2 ELF surface to one reviewed 56-symbol GCC/Clang-stable manifest and qualified a real installed consumer.
+- Qualified the 2.0 boundary against the generation-3 `libpkgapply.so.3` runtime while retaining this library's own SONAME 2.
 
 ## 1.1.0 — 2026-08-02
 

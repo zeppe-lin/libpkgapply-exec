@@ -1,6 +1,13 @@
 # SPDX-FileCopyrightText: 2026 Alexandr Savca
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+private_execution_request_test_support = static_library(
+  'pkgapply-exec-test-execution-request',
+  '../src/executor.cpp',
+  include_directories: public_inc,
+  dependencies: public_deps,
+)
+
 fixture_test_deps = [
   libpkgapply_exec_dep,
   dependency('libpkgbuild-image', version: ['>=1.0.0', '<2.0.0'], required: true, static: want_static),
@@ -38,10 +45,15 @@ foreach name, source : unit_tests
 endforeach
 
 foreach name, source : integration_tests
+  private_link = []
+  if name == 'request-projection' or name == 'backend-contract'
+    private_link += [private_execution_request_test_support]
+  endif
   executable_test = executable(
     name + '-test',
     source,
     dependencies: fixture_test_deps,
+    link_with: private_link,
   )
   test(name, executable_test, suite: 'integration')
 endforeach
@@ -81,6 +93,8 @@ contract_tests = {
   'release-metadata': 'contracts/check_release_metadata.sh',
   'meson-sources': 'contracts/check_meson_sources.sh',
   'test-layout': 'contracts/check_test_layout.sh',
+  'abi-contract': 'contracts/check_abi_contract.sh',
+  'ci-contract': 'contracts/check_ci_contract.sh',
 }
 foreach name, program : contract_tests
   test(
@@ -90,3 +104,13 @@ foreach name, program : contract_tests
     suite: 'contract',
   )
 endforeach
+
+if library_kind == 'shared'
+  abi_surface = find_program('contracts/check_abi_surface.sh')
+  test(
+    'abi-surface',
+    abi_surface,
+    args: [libpkgapply_exec, meson.project_source_root() / 'abi/libpkgapply-exec.exports'],
+    suite: 'contract',
+  )
+endif

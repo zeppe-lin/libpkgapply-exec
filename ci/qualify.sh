@@ -4,6 +4,8 @@
 set -eu
 root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 sh -n "$root"/tests/contracts/*.sh
+"$root/tests/contracts/check_abi_contract.sh" "$root"
+"$root/tests/contracts/check_ci_contract.sh" "$root"
 "$root/tests/contracts/check_authority_contract.sh" "$root"
 "$root/tests/contracts/check_codec_contract.sh" "$root"
 "$root/tests/contracts/check_meson_sources.sh" "$root"

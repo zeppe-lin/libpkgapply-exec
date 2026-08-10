@@ -81,3 +81,23 @@ meson setup "$build/product" "$root" \
   "$@"
 meson compile -C "$build/product"
 meson test -C "$build/product" --no-rebuild --print-errorlogs
+meson install -C "$build/product"
+if [ "$link_mode" = shared ]; then
+  "$root/ci/audit-shared-boundary.sh" "$build/install/lib/libpkgapply-exec.so.2"
+fi
+
+consumer="$root/tests/installed/consumer.cpp"
+consumer_bin="$build/installed-consumer"
+product_pkgconfig="$build/install/lib/pkgconfig"
+consumer_pkgconfig="$product_pkgconfig:$dependency_prefix/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
+consumer_flags=$(PKG_CONFIG_PATH="$consumer_pkgconfig" pkg-config --cflags libpkgapply-exec)
+if [ "$link_mode" = static ]; then
+  consumer_libs=$(PKG_CONFIG_PATH="$consumer_pkgconfig" pkg-config --static --libs libpkgapply-exec)
+else
+  consumer_libs=$(PKG_CONFIG_PATH="$consumer_pkgconfig" pkg-config --libs libpkgapply-exec)
+fi
+# shellcheck disable=SC2086
+"${CXX:-c++}" -std=c++17 -Wall -Wextra -Wpedantic -Werror \
+  $consumer_flags "$consumer" -o "$consumer_bin" $consumer_libs
+LD_LIBRARY_PATH="$build/install/lib:$dependency_prefix/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" \
+  "$consumer_bin"

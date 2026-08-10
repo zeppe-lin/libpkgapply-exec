@@ -75,3 +75,12 @@ backend-profile substitution. Identity strings alone never rehydrate authority.
 
 Sanitizer builds should instrument the adapter, its dependency closure, and the
 unit/integration/protocol executables normally.
+
+## Installed and ABI qualification
+
+Shared qualification compares the built DSO against the reviewed 56-symbol
+`abi/libpkgapply-exec.exports` surface. The staged consumer is compiled through
+installed pkg-config metadata and executes real lifecycle derivation from one
+sealed application request; static qualification therefore exercises the
+complete public `libpkgapply` and `libpkgexec` closure rather than taking a
+function address.

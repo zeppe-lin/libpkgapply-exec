@@ -24,8 +24,10 @@ Before tagging:
 ```
 
 Review public dependency metadata, SONAME, generated manuals, installed-header
-consumers, and the authority-contract test. Keep diagnostics and host paths out
-of semantic identities.
+consumers, and the authority-contract test. The shared generation-2 release
+surface is the reviewed 56-symbol `abi/libpkgapply-exec.exports` manifest; GCC
+and Clang shared builds must match it exactly. Keep diagnostics and host paths
+out of semantic identities.
 
 Durable evidence codecs may embed canonical records from subordinate owners,
 but must require complete semantic authority bodies from the caller rather

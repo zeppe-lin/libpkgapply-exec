@@ -5,7 +5,7 @@ set -eu
 root=$1
 meson=$root/tests/meson.build
 
-for directory in contracts fixtures header integration protocol support unit; do
+for directory in contracts fixtures header installed integration protocol support unit; do
   test -d "$root/tests/$directory" || {
     echo "missing test role directory: $directory" >&2
     exit 1
@@ -20,6 +20,7 @@ for suite in unit integration protocol header contract; do
 done
 
 grep -F "test('header-' + header.underscorify(), header_test, suite: 'header')" "$meson" >/dev/null
+[ -f "$root/tests/installed/consumer.cpp" ] || { echo 'missing installed consumer' >&2; exit 1; }
 if grep -F "test('header:'" "$meson" >/dev/null; then
   echo 'deprecated colon remains in generated header test name' >&2
   exit 1
