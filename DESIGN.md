@@ -133,7 +133,7 @@ The library does not:
 
 The durable record belongs to this adapter because it binds one exact lifecycle
 node to the corresponding `libpkgexec` process evidence. The record embeds the
-canonical `libpkgexec 1.4` execution-result encoding and adds only
+canonical `libpkgexec` execution-result encoding version 1 and adds only
 adapter-owned identities.
 
 The record does not serialize an application request, lifecycle node, admitted

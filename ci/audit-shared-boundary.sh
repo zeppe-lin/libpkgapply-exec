@@ -27,10 +27,14 @@ printf '%s\n' "$needed" | grep -F \
   exit 1
 }
 printf '%s\n' "$needed" | grep -F \
-  'Shared library: [libpkgexec.so.1]' >/dev/null || {
+  'Shared library: [libpkgexec.so.2]' >/dev/null || {
   echo 'shared-boundary-audit: execution core is absent' >&2
   exit 1
 }
+if printf '%s\n' "$needed" | grep -E 'libpkgexec\.so\.[01]' >/dev/null; then
+  echo 'shared-boundary-audit: obsolete execution-core SONAME remains' >&2
+  exit 1
+fi
 if printf '%s\n' "$needed" | grep -F 'libpkgapply.so.2' >/dev/null; then
   echo 'shared-boundary-audit: obsolete semantic-core SONAME remains' >&2
   exit 1

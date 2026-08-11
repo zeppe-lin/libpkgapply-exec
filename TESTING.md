@@ -79,7 +79,9 @@ unit/integration/protocol executables normally.
 ## Installed and ABI qualification
 
 Shared qualification compares the built DSO against the reviewed 56-symbol
-`abi/libpkgapply-exec.exports` surface. The staged consumer is compiled through
+`abi/libpkgapply-exec.exports` surface, freezes the current x86-64 execution
+carrier layouts, and requires a direct `NEEDED libpkgexec.so.2` edge while
+refusing execution generations 0 and 1. The staged consumer is compiled through
 installed pkg-config metadata and executes real lifecycle derivation from one
 sealed application request; static qualification therefore exercises the
 complete public `libpkgapply` and `libpkgexec` closure rather than taking a

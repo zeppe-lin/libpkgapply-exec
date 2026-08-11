@@ -35,6 +35,9 @@ for path in \
   tests/installed/consumer.cpp \
   tests/contracts/check_abi_contract.sh \
   tests/contracts/check_abi_surface.sh \
+  tests/contracts/abi_layout_test.cpp \
+  tests/contracts/check_exec_abi_generation.sh \
+  tests/contracts/check_pkgconfig_metadata.sh \
   tests/contracts/check_ci_contract.sh \
   tests/contracts/check_authority_contract.sh \
   tests/contracts/check_codec_contract.sh \

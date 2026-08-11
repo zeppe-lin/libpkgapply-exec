@@ -48,3 +48,24 @@ for obsolete in lifecycle_test.cpp result_codec_test.cpp public_headers.cpp fixt
     exit 1
   }
 done
+
+grep -F "'pkgconfig-metadata'" "$meson" >/dev/null || {
+  echo 'missing pkg-config metadata contract registration' >&2
+  exit 1
+}
+grep -F "'abi-layout'" "$meson" >/dev/null || {
+  echo 'missing ABI layout contract registration' >&2
+  exit 1
+}
+grep -F "'exec-abi-generation'" "$meson" >/dev/null || {
+  echo 'missing exec ABI generation contract registration' >&2
+  exit 1
+}
+[ -x "$root/tests/contracts/check_exec_abi_generation.sh" ] || {
+  echo 'missing executable exec ABI generation contract' >&2
+  exit 1
+}
+[ -x "$root/tests/contracts/check_pkgconfig_metadata.sh" ] || {
+  echo 'missing executable pkg-config metadata contract' >&2
+  exit 1
+}

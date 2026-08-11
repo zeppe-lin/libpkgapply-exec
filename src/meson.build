@@ -24,7 +24,10 @@ public_headers = files(
   '../include/libpkgapply-exec/result_codec.h',
   '../include/libpkgapply-exec/libpkgapply-exec.h',
 )
-public_deps = [libpkgapply_dep, libpkgexec_dep]
+public_deps = [
+  libpkgapply_dep,
+  libpkgexec_dep,
+]
 libpkgapply_exec = library(
   'pkgapply-exec', ['error.cpp', 'model.cpp', 'derive.cpp', 'execution_request.cpp', 'executor.cpp', 'result_codec.cpp'],
   include_directories: public_inc, dependencies: public_deps,
@@ -39,5 +42,5 @@ install_headers(public_headers, subdir: 'libpkgapply-exec')
 pkgconf.generate(
   libpkgapply_exec, name: 'libpkgapply-exec', filebase: 'libpkgapply-exec',
   description: 'Exact package lifecycle execution adapter', subdirs: '.',
-  requires: ['libpkgapply >= 3.0.0, libpkgapply < 4.0.0', 'libpkgexec >= 1.4.0, libpkgexec < 2.0.0'],
+  requires: public_deps,
 )

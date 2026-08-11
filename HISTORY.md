@@ -10,6 +10,7 @@
 - Split qualification into unit, integration, protocol, standalone-header, and static-contract roles.
 - Froze the pre-release generation-2 ELF surface to one reviewed 56-symbol GCC/Clang-stable manifest and qualified a real installed consumer.
 - Qualified the 2.0 boundary against the generation-3 `libpkgapply.so.3` runtime while retaining this library's own SONAME 2.
+- Bound the unchanged lifecycle execution carriers to `libpkgexec 2.x` / `libpkgexec.so.2`; the exec1→exec2 owner correction does not advance this library's SONAME because the retained execution layouts are unchanged.
 
 ## 1.1.0 — 2026-08-02
 

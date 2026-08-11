@@ -26,18 +26,18 @@ jobs:
       CXX: ${{ matrix.cxx }}
     steps:
       - uses: actions/checkout@v4
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgsource, ref: v3.0.1, path: dependencies/libpkgsource}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgstate, ref: v3.1.0, path: dependencies/libpkgstate}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgimage, ref: v0.4.0, path: dependencies/libpkgimage}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgcatalog, ref: v3.0.1, path: dependencies/libpkgcatalog}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgresolve, ref: v2.0.0, path: dependencies/libpkgresolve}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgbuild, ref: v3.0.0, path: dependencies/libpkgbuild}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgplan, ref: v0.3.1, path: dependencies/libpkgplan}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgbuild-image, ref: v1.0.0, path: dependencies/libpkgbuild-image}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgsource-plan, ref: v1.1.0, path: dependencies/libpkgsource-plan}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgbuild-plan, ref: v1.0.0, path: dependencies/libpkgbuild-plan}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgapply, ref: v3.0.0, path: dependencies/libpkgapply}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgexec, ref: v1.4.0, path: dependencies/libpkgexec}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgsource, ref: 9a2a85c85c20bbfa77306f3eb14ccc67ac1e800c, path: dependencies/libpkgsource}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgstate, ref: f74df278b47b48e798c3de01c922c59b58319d13, path: dependencies/libpkgstate}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgimage, ref: 284324996dce673e1a96d73f8adb90b29dbb79f5, path: dependencies/libpkgimage}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgcatalog, ref: 16976cac176f576871e327d5d2f6fe9d9dfa0666, path: dependencies/libpkgcatalog}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgresolve, ref: f8786884cde0d2692119a79ac98582fade20fe97, path: dependencies/libpkgresolve}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgbuild, ref: dadabeccf0118f1f23b646292c6f3c8eb44f8647, path: dependencies/libpkgbuild}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgplan, ref: 2c6e5394749ffa0ad76fbdd1918d5a6793c5d0ec, path: dependencies/libpkgplan}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgbuild-image, ref: a8077e6d6a5143a5a7c6537d001703615562f4e7, path: dependencies/libpkgbuild-image}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgsource-plan, ref: ad599af6c4fe627932932aae8fa0038a4e69f0cd, path: dependencies/libpkgsource-plan}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgbuild-plan, ref: 5b680baf0d99ff752b7fe951fa0d191693a5a256, path: dependencies/libpkgbuild-plan}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgapply, ref: 02b05ffe54cf2cf845642bf0ae285705344633b5, path: dependencies/libpkgapply}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgexec, ref: v2.0.0, path: dependencies/libpkgexec}}
       - name: Install tools
         run: |
           sudo apt-get update
@@ -79,18 +79,18 @@ jobs:
       UBSAN_OPTIONS: halt_on_error=1:abort_on_error=1:print_stacktrace=1
     steps:
       - uses: actions/checkout@v4
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgsource, ref: v3.0.1, path: dependencies/libpkgsource}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgstate, ref: v3.1.0, path: dependencies/libpkgstate}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgimage, ref: v0.4.0, path: dependencies/libpkgimage}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgcatalog, ref: v3.0.1, path: dependencies/libpkgcatalog}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgresolve, ref: v2.0.0, path: dependencies/libpkgresolve}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgbuild, ref: v3.0.0, path: dependencies/libpkgbuild}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgplan, ref: v0.3.1, path: dependencies/libpkgplan}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgbuild-image, ref: v1.0.0, path: dependencies/libpkgbuild-image}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgsource-plan, ref: v1.1.0, path: dependencies/libpkgsource-plan}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgbuild-plan, ref: v1.0.0, path: dependencies/libpkgbuild-plan}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgapply, ref: v3.0.0, path: dependencies/libpkgapply}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgexec, ref: v1.4.0, path: dependencies/libpkgexec}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgsource, ref: 9a2a85c85c20bbfa77306f3eb14ccc67ac1e800c, path: dependencies/libpkgsource}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgstate, ref: f74df278b47b48e798c3de01c922c59b58319d13, path: dependencies/libpkgstate}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgimage, ref: 284324996dce673e1a96d73f8adb90b29dbb79f5, path: dependencies/libpkgimage}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgcatalog, ref: 16976cac176f576871e327d5d2f6fe9d9dfa0666, path: dependencies/libpkgcatalog}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgresolve, ref: f8786884cde0d2692119a79ac98582fade20fe97, path: dependencies/libpkgresolve}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgbuild, ref: dadabeccf0118f1f23b646292c6f3c8eb44f8647, path: dependencies/libpkgbuild}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgplan, ref: 2c6e5394749ffa0ad76fbdd1918d5a6793c5d0ec, path: dependencies/libpkgplan}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgbuild-image, ref: a8077e6d6a5143a5a7c6537d001703615562f4e7, path: dependencies/libpkgbuild-image}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgsource-plan, ref: ad599af6c4fe627932932aae8fa0038a4e69f0cd, path: dependencies/libpkgsource-plan}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgbuild-plan, ref: 5b680baf0d99ff752b7fe951fa0d191693a5a256, path: dependencies/libpkgbuild-plan}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgapply, ref: 02b05ffe54cf2cf845642bf0ae285705344633b5, path: dependencies/libpkgapply}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgexec, ref: v2.0.0, path: dependencies/libpkgexec}}
       - name: Install tools
         run: |
           sudo apt-get update

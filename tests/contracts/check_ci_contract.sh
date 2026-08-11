@@ -5,23 +5,27 @@ set -eu
 root=${1:?}
 workflow=$root/.github/workflows/ci.yml
 fail() { echo "ci-contract: $*" >&2; exit 1; }
-for pair in \
-  'libpkgsource v3.0.1' \
-  'libpkgstate v3.1.0' \
-  'libpkgcatalog v3.0.1' \
-  'libpkgplan v0.3.1' \
-  'libpkgsource-plan v1.1.0' \
-  'libpkgapply v3.0.0' \
-  'libpkgexec v1.4.0'
+for expected in \
+  'zeppe-lin/libpkgsource, ref: 9a2a85c85c20bbfa77306f3eb14ccc67ac1e800c' \
+  'zeppe-lin/libpkgstate, ref: f74df278b47b48e798c3de01c922c59b58319d13' \
+  'zeppe-lin/libpkgimage, ref: 284324996dce673e1a96d73f8adb90b29dbb79f5' \
+  'zeppe-lin/libpkgcatalog, ref: 16976cac176f576871e327d5d2f6fe9d9dfa0666' \
+  'zeppe-lin/libpkgresolve, ref: f8786884cde0d2692119a79ac98582fade20fe97' \
+  'zeppe-lin/libpkgbuild, ref: dadabeccf0118f1f23b646292c6f3c8eb44f8647' \
+  'zeppe-lin/libpkgplan, ref: 2c6e5394749ffa0ad76fbdd1918d5a6793c5d0ec' \
+  'zeppe-lin/libpkgbuild-image, ref: a8077e6d6a5143a5a7c6537d001703615562f4e7' \
+  'zeppe-lin/libpkgsource-plan, ref: ad599af6c4fe627932932aae8fa0038a4e69f0cd' \
+  'zeppe-lin/libpkgbuild-plan, ref: 5b680baf0d99ff752b7fe951fa0d191693a5a256' \
+  'zeppe-lin/libpkgapply, ref: 02b05ffe54cf2cf845642bf0ae285705344633b5' \
+  'zeppe-lin/libpkgexec, ref: v2.0.0'
 do
-  set -- $pair
-  repository=$1
-  ref=$2
-  [ "$(grep -F "repository: zeppe-lin/$repository, ref: $ref" "$workflow" | wc -l)" -eq 2 ] ||
-    fail "$repository is not pinned to $ref in both hosted matrices"
+  count=$(grep -F "$expected" "$workflow" | wc -l)
+  test "$count" -eq 2 || fail "current authority checkout is not pinned in both hosted matrices: $expected"
 done
-! grep -F 'repository: zeppe-lin/libpkgapply, ref: v2.' "$workflow" >/dev/null ||
-  fail 'obsolete libpkgapply generation remains in hosted qualification'
+! grep -F 'repository: zeppe-lin/libpkgresolve, ref: v2.0.0' "$workflow" >/dev/null ||
+  fail 'obsolete resolver2 checkout remains in hosted qualification'
+! grep -F 'repository: zeppe-lin/libpkgexec, ref: v1.' "$workflow" >/dev/null ||
+  fail 'obsolete exec1 checkout remains in hosted qualification'
 grep -F 'meson install -C "$build/product"' "$root/ci/configure-and-test.sh" >/dev/null ||
   fail 'product is not staged before installed-consumer qualification'
 grep -F 'audit-shared-boundary.sh' "$root/ci/configure-and-test.sh" >/dev/null ||

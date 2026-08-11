@@ -14,6 +14,13 @@ continuation belongs to the effectful controller.
 The adapter must remain backend-neutral and must not depend on
 `libpkgexec-linux`.
 
+`admitted_lifecycle_session`, `prepared_execution`, and
+`lifecycle_execution_result` retain `libpkgexec` values by value. A future
+execution ABI generation therefore requires an explicit carrier-layout review
+before the accepted dependency interval is widened. Shared qualification must
+prove the actual `libpkgapply-exec.so.2` product names `libpkgexec.so.2` and
+refuses obsolete execution generations.
+
 ## Release qualification
 
 Before tagging:
