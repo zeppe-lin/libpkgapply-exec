@@ -17,7 +17,7 @@ for expected in \
   'zeppe-lin/libpkgsource-plan, ref: ad599af6c4fe627932932aae8fa0038a4e69f0cd' \
   'zeppe-lin/libpkgbuild-plan, ref: 5b680baf0d99ff752b7fe951fa0d191693a5a256' \
   'zeppe-lin/libpkgapply, ref: 02b05ffe54cf2cf845642bf0ae285705344633b5' \
-  'zeppe-lin/libpkgexec, ref: v2.0.0'
+  'zeppe-lin/libpkgexec, ref: v2.1.0'
 do
   count=$(grep -F "$expected" "$workflow" | wc -l)
   test "$count" -eq 2 || fail "current authority checkout is not pinned in both hosted matrices: $expected"

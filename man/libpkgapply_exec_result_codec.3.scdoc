@@ -10,25 +10,26 @@ encode_lifecycle_execution_result, decode_lifecycle_execution_result - retain an
 
 *lifecycle_execution_result_encoding encode_lifecycle_execution_result(const lifecycle_execution_result& result);*
 
-*lifecycle_execution_result decode_lifecycle_execution_result(const lifecycle_execution_result_encoding& encoding, admitted_lifecycle_session session, pkgexec::backend_capability_profile backend);*
+*lifecycle_execution_result decode_lifecycle_execution_result(const lifecycle_execution_result_encoding& encoding, admitted_lifecycle_session session);*
 
 # DESCRIPTION
 
 *encode_lifecycle_execution_result*() emits the canonical versioned record for
 one retained *lifecycle_execution_result*. The record embeds the canonical
-*libpkgexec* execution-result encoding and binds it to the exact lifecycle-node
-and adapter-result identities.
+*libpkgexec* backend-profile and execution-result encodings and binds them to
+the exact lifecycle-node and adapter-result identities.
 
 *decode_lifecycle_execution_result*() requires the complete admitted lifecycle
-session and exact backend capability profile. It verifies the whole-record
-checksum, derives the execution request purely from the session, delegates the
-embedded execution evidence to *libpkgexec*, reconstructs the adapter result,
-checks every retained identity, and requires canonical byte-for-byte
-re-encoding.
+session. It verifies the whole-record checksum, reopens the exact retained
+*libpkgexec* backend profile, derives the execution request purely from the
+session, delegates the embedded execution evidence to *libpkgexec*, reconstructs
+the adapter result, checks every retained identity, and requires canonical
+byte-for-byte re-encoding.
 
 The codec never serializes or reconstructs application requests, lifecycle
-nodes, admitted sessions, execution requests, backend profiles, host paths,
-credentials, resource materializations, or backend semantics. Identity strings
+nodes, admitted sessions, execution requests, host paths, credentials, resource
+materializations, or backend semantics. The retained backend-profile bytes are
+owned and interpreted by *libpkgexec*. Identity strings
 are not semantic authority. Decoding does not call *prepare*(3), inspect or
 create directories, change ownership, build execution resources, invoke a
 backend, execute a program, publish state, or perform any other mutation.
@@ -37,8 +38,9 @@ backend, execute a program, publish state, or perform any other mutation.
 
 Malformed, truncated, noncanonical, or internally inconsistent bytes raise
 *pkgapply_exec::error* with *corrupt_encoding*. A valid record presented with a
-different lifecycle node, execution-session authority, or backend profile
-raises *authority_mismatch*. Encoding a result that violates the adapter
+different lifecycle node or execution-session authority raises
+*authority_mismatch*. Invalid or internally inconsistent retained backend-profile
+bytes are corrupt evidence. Encoding a result that violates the adapter
 contract raises *inconsistent_result*.
 
 # SEE ALSO

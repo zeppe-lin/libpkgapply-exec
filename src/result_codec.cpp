@@ -4,6 +4,7 @@
 #include <libpkgapply-exec/result_codec.h>
 
 #include <libpkgapply-exec/error.h>
+#include <libpkgexec/profile_codec.h>
 #include <libpkgexec/result_codec.h>
 
 #include "execution_request.h"
@@ -76,10 +77,10 @@ public:
     output_.insert(output_.end(), data, data + size);
   }
 
-  void bytes(const std::vector<std::uint8_t>& value)
+  void bytes(const std::vector<std::uint8_t>& value, std::string_view name)
   {
     if (value.size() > std::numeric_limits<std::uint32_t>::max())
-      inconsistent("embedded execution evidence is too large");
+      inconsistent(std::string(name) + " is too large");
     u32(static_cast<std::uint32_t>(value.size()));
     raw(value.data(), value.size());
   }
@@ -166,11 +167,12 @@ public:
     return value;
   }
 
-  std::vector<std::uint8_t> bytes(std::size_t maximum)
+  std::vector<std::uint8_t> bytes(
+      std::size_t maximum, std::string_view name)
   {
     const auto size = static_cast<std::size_t>(u32());
     if (size > maximum)
-      corrupt("embedded execution evidence exceeds its limit");
+      corrupt(std::string(name) + " exceeds its limit");
     require(size);
     std::vector<std::uint8_t> value(
         input_.begin() + static_cast<std::ptrdiff_t>(offset_),
@@ -231,7 +233,12 @@ lifecycle_execution_result_encoding encode_lifecycle_execution_result(
   output.identity(result.execution().backend().identity().hex());
   output.identity(result.execution().identity().hex());
   output.identity(result.identity().hex());
-  output.bytes(pkgexec::encode_execution_result(result.execution()));
+  output.bytes(
+      pkgexec::encode_backend_capability_profile(result.execution().backend()),
+      "embedded backend profile");
+  output.bytes(
+      pkgexec::encode_execution_result(result.execution()),
+      "embedded execution evidence");
 
   const auto& payload = output.output();
   output.identity(checksum_hex(payload, payload.size()));
@@ -240,8 +247,7 @@ lifecycle_execution_result_encoding encode_lifecycle_execution_result(
 
 lifecycle_execution_result decode_lifecycle_execution_result(
     const lifecycle_execution_result_encoding& encoding,
-    admitted_lifecycle_session session,
-    pkgexec::backend_capability_profile backend)
+    admitted_lifecycle_session session)
 {
   try {
     if (encoding.size() > maximum_lifecycle_execution_result_encoding_size)
@@ -277,16 +283,28 @@ lifecycle_execution_result decode_lifecycle_execution_result(
 
     if (session.node().identity().hex() != node_identity)
       mismatch("lifecycle-execution record belongs to another lifecycle node");
+    auto backend_encoding = input.bytes(
+        pkgexec::maximum_backend_capability_profile_encoding_size,
+        "embedded backend profile");
+    auto execution_encoding = input.bytes(
+        pkgexec::maximum_execution_result_encoding_size,
+        "embedded execution evidence");
+    input.finish();
+
+    auto backend = [&]() -> pkgexec::backend_capability_profile {
+      try {
+        return pkgexec::decode_backend_capability_profile(backend_encoding);
+      } catch (const pkgexec::error& problem) {
+        corrupt("embedded backend profile is invalid: " +
+                std::string(problem.what()));
+      }
+    }();
     if (backend.identity().hex() != backend_identity)
-      mismatch("lifecycle-execution record belongs to another backend profile");
+      corrupt("embedded backend profile identity mismatch");
 
     auto execution_request = detail::lifecycle_execution_request(session);
     if (execution_request.identity().hex() != execution_request_identity)
       mismatch("lifecycle-execution record belongs to another lifecycle session");
-
-    auto execution_encoding = input.bytes(
-        pkgexec::maximum_execution_result_encoding_size);
-    input.finish();
 
     auto execution = [&]() -> pkgexec::execution_result {
       try {

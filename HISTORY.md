@@ -1,5 +1,13 @@
 # History
 
+## 3.0.0 — 2026-08-12
+
+- Made lifecycle-result evidence self-contained with the exact `libpkgexec` backend-capability-profile owner encoding that admitted its embedded execution result.
+- Removed the caller-supplied backend-profile argument from durable lifecycle-result decode; historical execution authority is no longer reconstructed by an outer controller.
+- Kept the durable lifecycle-result format at its first real schema generation while failing closed on incompatible development bytes.
+- Advanced the SONAME to `libpkgapply-exec.so.3` for the intentional decoder ABI break and required `libpkgexec >= 2.1.0` for the profile codec.
+- Requalified the reviewed 56-symbol ABI surface, protocol refusal/round-trip tests, installed consumer, and shared/static dependency closure.
+
 ## 2.0.0 — 2026-08-05
 
 - Rebuilt admitted lifecycle sessions against the corrected opaque `libpkgapply 3.0.0` application-request ABI.

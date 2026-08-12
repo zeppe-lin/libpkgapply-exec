@@ -35,7 +35,8 @@ void prove_roundtrip(backend_mode mode, std::string_view suffix)
   fs::remove_all(base);
 
   const auto decoded = pkgapply_exec::decode_lifecycle_execution_result(
-      encoding, admitted, profile);
+      encoding, admitted);
+  TEST_CHECK(decoded.execution().backend() == profile);
   TEST_CHECK(!fs::exists(base));
   TEST_CHECK(decoded.identity() == original.identity());
   TEST_CHECK(decoded.node().identity() == original.node().identity());

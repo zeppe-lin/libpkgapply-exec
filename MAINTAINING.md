@@ -31,7 +31,7 @@ Before tagging:
 ```
 
 Review public dependency metadata, SONAME, generated manuals, installed-header
-consumers, and the authority-contract test. The shared generation-2 release
+consumers, and the authority-contract test. The shared generation-3 release
 surface is the reviewed 56-symbol `abi/libpkgapply-exec.exports` manifest; GCC
 and Clang shared builds must match it exactly. Keep diagnostics and host paths
 out of semantic identities.

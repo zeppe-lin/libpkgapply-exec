@@ -28,7 +28,7 @@ grep -F '_ZN13pkgapply_exec7executeERKNS_26admitted_lifecycle_sessionERN7pkgexec
   fail 'execute() is absent from reviewed ABI'
 grep -F '_ZN13pkgapply_exec33decode_lifecycle_execution_result' "$manifest" >/dev/null ||
   fail 'durable decoder is absent from reviewed ABI'
-grep -F 'soversion: '\''2'\''' "$root/src/meson.build" >/dev/null ||
+grep -F 'soversion: '\''3'\''' "$root/src/meson.build" >/dev/null ||
   fail 'provider SONAME generation changed unexpectedly'
 grep -F -- '--version-script=' "$root/src/meson.build" >/dev/null ||
   fail 'reviewed ELF export manifest is not linked'

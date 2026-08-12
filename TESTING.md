@@ -65,13 +65,15 @@ an injected backend because backend selection belongs to orchestration.
 
 `result-codec-roundtrip` retains real successful, not-started-failed, and
 started-failed lifecycle results and then removes every backing test directory.
-Decode must reconstruct the exact execution request from the admitted session
-without calling `prepare()` or touching the filesystem, and canonical re-encode
-must reproduce the original bytes.
+Decode must reconstruct the exact execution request from the admitted session,
+reopen the exact retained libpkgexec backend profile, and decode the embedded
+execution evidence without calling `prepare()` or touching the filesystem.
+Canonical re-encode must reproduce the original bytes.
 
 `result-codec-refusal` covers whole-record corruption, truncation, trailing
-bytes, lifecycle-node substitution, execution-session substitution, and
-backend-profile substitution. Identity strings alone never rehydrate authority.
+bytes, lifecycle-node substitution, and execution-session substitution. The
+backend-profile body is retained inside the lifecycle result through the
+libpkgexec owner codec; identity strings alone never rehydrate authority.
 
 Sanitizer builds should instrument the adapter, its dependency closure, and the
 unit/integration/protocol executables normally.

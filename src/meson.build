@@ -32,7 +32,7 @@ libpkgapply_exec = library(
   'pkgapply-exec', ['error.cpp', 'model.cpp', 'derive.cpp', 'execution_request.cpp', 'executor.cpp', 'result_codec.cpp'],
   include_directories: public_inc, dependencies: public_deps,
   link_args: library_link_args, link_depends: library_link_depends,
-  install: true, version: meson.project_version(), soversion: '2',
+  install: true, version: meson.project_version(), soversion: '3',
 )
 libpkgapply_exec_dep = declare_dependency(
   link_with: libpkgapply_exec, include_directories: public_inc, dependencies: public_deps,

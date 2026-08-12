@@ -29,13 +29,12 @@ encode_lifecycle_execution_result(const lifecycle_execution_result& result);
 /*! \brief Decode evidence under exact caller-supplied session authority.
  *
  * The decoder derives the execution request from the admitted lifecycle
- * session without preparing resources or touching the filesystem. It then
- * decodes the embedded libpkgexec evidence under that exact request and the
- * supplied backend profile.
+ * session without preparing resources or touching the filesystem. The record
+ * carries the exact libpkgexec backend-profile body that admitted its embedded
+ * execution evidence; callers do not reconstruct that historical authority.
  */
 [[nodiscard]] lifecycle_execution_result decode_lifecycle_execution_result(
     const lifecycle_execution_result_encoding& encoding,
-    admitted_lifecycle_session session,
-    pkgexec::backend_capability_profile backend);
+    admitted_lifecycle_session session);
 
 } // namespace pkgapply_exec

@@ -32,9 +32,11 @@ resource limits, and disables cancellation.
 
 The versioned lifecycle-execution codec retains the exact *libpkgexec*
 execution record and binds it to the exact lifecycle node. Decode requires the
-complete admitted lifecycle session and backend profile. It derives the
-execution request without preparing resources, invoking a backend, or touching
-the filesystem.
+complete admitted lifecycle session. The result record itself retains the exact
+*libpkgexec*-owned backend-profile bytes required to reopen its execution
+evidence, so callers do not reconstruct historical backend authority. Decode
+derives the execution request without preparing resources, invoking a backend,
+or touching the filesystem.
 
 # EXCLUSIONS
 

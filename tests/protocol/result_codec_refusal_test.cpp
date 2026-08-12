@@ -10,7 +10,6 @@
 namespace fs = std::filesystem;
 
 namespace {
-using pkgapply_exec_test::backend_capabilities;
 using pkgapply_exec_test::backend_mode;
 using pkgapply_exec_test::fixture_backend;
 using pkgapply_exec_test::node;
@@ -21,12 +20,11 @@ using pkgapply_exec_test::temporary_base;
 
 bool refused(const pkgapply_exec::lifecycle_execution_result_encoding& bytes,
              pkgapply_exec::admitted_lifecycle_session admitted,
-             pkgexec::backend_capability_profile backend,
              pkgapply_exec::error_code expected)
 {
   try {
     (void)pkgapply_exec::decode_lifecycle_execution_result(
-        bytes, std::move(admitted), std::move(backend));
+        bytes, std::move(admitted));
   } catch (const pkgapply_exec::error& value) {
     return value.code() == expected;
   }
@@ -49,36 +47,33 @@ void prove_corruption_and_authority_refusal()
   fixture_backend backend(backend_mode::succeed);
   const auto result = pkgapply_exec::execute(admitted, backend);
   const auto encoding = pkgapply_exec::encode_lifecycle_execution_result(result);
-  const auto profile = result.execution().backend();
   fs::remove_all(base);
 
   auto corrupt = encoding;
   corrupt[corrupt.size() / 2U] ^= 0x01U;
-  TEST_CHECK(refused(corrupt, admitted, profile,
+  TEST_CHECK(refused(corrupt, admitted,
                      pkgapply_exec::error_code::corrupt_encoding));
 
   auto truncated = encoding;
   truncated.pop_back();
-  TEST_CHECK(refused(truncated, admitted, profile,
+  TEST_CHECK(refused(truncated, admitted,
                      pkgapply_exec::error_code::corrupt_encoding));
 
   auto trailing = encoding;
   trailing.push_back(0U);
-  TEST_CHECK(refused(trailing, admitted, profile,
+  TEST_CHECK(refused(trailing, admitted,
                      pkgapply_exec::error_code::corrupt_encoding));
 
   const auto foreign_node = session(
       application.install, post, temporary_base("codec-foreign-node"));
-  TEST_CHECK(refused(encoding, foreign_node, profile,
+  TEST_CHECK(refused(encoding, foreign_node,
                      pkgapply_exec::error_code::authority_mismatch));
 
   const auto foreign_execution = session(
       application.install, pre, temporary_base("codec-foreign-execution"), 9, 3);
-  TEST_CHECK(refused(encoding, foreign_execution, profile,
+  TEST_CHECK(refused(encoding, foreign_execution,
                      pkgapply_exec::error_code::authority_mismatch));
 
-  TEST_CHECK(refused(encoding, admitted, backend_capabilities('b'),
-                     pkgapply_exec::error_code::authority_mismatch));
 }
 }
 

@@ -133,21 +133,22 @@ The library does not:
 
 The durable record belongs to this adapter because it binds one exact lifecycle
 node to the corresponding `libpkgexec` process evidence. The record embeds the
-canonical `libpkgexec` execution-result encoding version 1 and adds only
-adapter-owned identities.
+canonical `libpkgexec` execution-result encoding version 1 and the canonical
+`libpkgexec` backend-capability-profile encoding version 1 required to interpret
+that exact execution evidence.
 
 The record does not serialize an application request, lifecycle node, admitted
-session, execution request, backend profile, host path, credential policy,
-resource materialization, or backend semantics. Decode requires the exact
-`admitted_lifecycle_session` and `pkgexec::backend_capability_profile` bodies
-from their owning authorities. Identity strings alone are not rehydration
-authority.
+session, execution request, host path, credential policy, resource
+materialization, or backend semantics. Decode requires the exact
+`admitted_lifecycle_session` from its owning authority. The backend profile is
+not reconstructed from an identity or supplied by a controller-level surrogate;
+its owner encoding travels with the lifecycle result.
 
 Decode derives the exact execution request from the admitted session through a
 pure internal projection. It does not call `prepare()`, create a session root,
 inspect the execution or target roots, change ownership, construct execution
 resources, invoke a backend, or otherwise touch the filesystem. The embedded
-execution record must reopen under that derived request and the supplied
+execution record must reopen under that derived request and the exact retained
 backend profile.
 
 The retained lifecycle-result identity is recomputed from the exact node and

@@ -22,7 +22,7 @@ test -n "${metadata:-}" && test -s "$metadata" ||
 name=$(sed -n 's/^Name:[[:space:]]*//p' "$metadata")
 test "$name" = libpkgapply-exec || fail "module name is '$name'"
 version=$(sed -n 's/^Version:[[:space:]]*//p' "$metadata")
-test "$version" = 2.0.0 || fail "module version is '$version'"
+test "$version" = 3.0.0 || fail "module version is '$version'"
 normalize_requirements()
 {
   sed \
@@ -36,11 +36,11 @@ requires=$(sed -n 's/^Requires:[[:space:]]*//p' "$metadata" |
   tr ',' '\n' | normalize_requirements)
 expected='libpkgapply >= 3.0.0
 libpkgapply < 4.0.0
-libpkgexec >= 2.0.0
+libpkgexec >= 2.1.0
 libpkgexec < 3.0.0'
 for requirement in \
   'libpkgapply >= 3.0.0' 'libpkgapply < 4.0.0' \
-  'libpkgexec >= 2.0.0' 'libpkgexec < 3.0.0'
+  'libpkgexec >= 2.1.0' 'libpkgexec < 3.0.0'
 do
   count=$(printf '%s\n' "$requires" | grep -Fxc "$requirement" || true)
   test "$count" -eq 1 ||

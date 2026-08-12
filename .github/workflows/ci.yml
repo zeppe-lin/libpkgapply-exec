@@ -37,7 +37,7 @@ jobs:
       - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgsource-plan, ref: ad599af6c4fe627932932aae8fa0038a4e69f0cd, path: dependencies/libpkgsource-plan}}
       - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgbuild-plan, ref: 5b680baf0d99ff752b7fe951fa0d191693a5a256, path: dependencies/libpkgbuild-plan}}
       - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgapply, ref: 02b05ffe54cf2cf845642bf0ae285705344633b5, path: dependencies/libpkgapply}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgexec, ref: v2.0.0, path: dependencies/libpkgexec}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgexec, ref: v2.1.0, path: dependencies/libpkgexec}}
       - name: Install tools
         run: |
           sudo apt-get update
@@ -90,7 +90,7 @@ jobs:
       - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgsource-plan, ref: ad599af6c4fe627932932aae8fa0038a4e69f0cd, path: dependencies/libpkgsource-plan}}
       - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgbuild-plan, ref: 5b680baf0d99ff752b7fe951fa0d191693a5a256, path: dependencies/libpkgbuild-plan}}
       - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgapply, ref: 02b05ffe54cf2cf845642bf0ae285705344633b5, path: dependencies/libpkgapply}}
-      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgexec, ref: v2.0.0, path: dependencies/libpkgexec}}
+      - {uses: actions/checkout@v4, with: {repository: zeppe-lin/libpkgexec, ref: v2.1.0, path: dependencies/libpkgexec}}
       - name: Install tools
         run: |
           sudo apt-get update
