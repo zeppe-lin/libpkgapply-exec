@@ -1,5 +1,16 @@
 # History
 
+## 3.0.1 — 2026-08-14
+
+- Close lifecycle execution on the source-ABI-4 runtime authority.
+- Require `libpkgapply >= 3.0.1, < 4.0.0`, excluding application 3.0.0
+  whose admitted build-plan interval could still select the source-3 closure.
+- Require `libpkgexec >= 2.1.1, < 3.0.0`, the first execution-2 release
+  whose source-4 dependency is addressable by version.
+- Qualify fixture construction against `libpkgbuild-image >= 1.0.1` and the
+  source-plan-2/build-plan-1.1 closure.
+- Keep SONAME 3 and the lifecycle-result codec generation unchanged.
+
 ## 3.0.0 — 2026-08-12
 
 - Made lifecycle-result evidence self-contained with the exact `libpkgexec` backend-capability-profile owner encoding that admitted its embedded execution result.

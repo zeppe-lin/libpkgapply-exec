@@ -6,18 +6,18 @@ root=${1:?}
 workflow=$root/.github/workflows/ci.yml
 fail() { echo "ci-contract: $*" >&2; exit 1; }
 for expected in \
-  'zeppe-lin/libpkgsource, ref: 9a2a85c85c20bbfa77306f3eb14ccc67ac1e800c' \
+  'zeppe-lin/libpkgsource, ref: v4.1.0' \
   'zeppe-lin/libpkgstate, ref: f74df278b47b48e798c3de01c922c59b58319d13' \
   'zeppe-lin/libpkgimage, ref: 284324996dce673e1a96d73f8adb90b29dbb79f5' \
-  'zeppe-lin/libpkgcatalog, ref: 16976cac176f576871e327d5d2f6fe9d9dfa0666' \
-  'zeppe-lin/libpkgresolve, ref: f8786884cde0d2692119a79ac98582fade20fe97' \
-  'zeppe-lin/libpkgbuild, ref: dadabeccf0118f1f23b646292c6f3c8eb44f8647' \
+  'zeppe-lin/libpkgcatalog, ref: v4.0.0' \
+  'zeppe-lin/libpkgresolve, ref: v4.0.0' \
+  'zeppe-lin/libpkgbuild, ref: v3.0.1' \
   'zeppe-lin/libpkgplan, ref: 2c6e5394749ffa0ad76fbdd1918d5a6793c5d0ec' \
-  'zeppe-lin/libpkgbuild-image, ref: a8077e6d6a5143a5a7c6537d001703615562f4e7' \
-  'zeppe-lin/libpkgsource-plan, ref: ad599af6c4fe627932932aae8fa0038a4e69f0cd' \
-  'zeppe-lin/libpkgbuild-plan, ref: 5b680baf0d99ff752b7fe951fa0d191693a5a256' \
-  'zeppe-lin/libpkgapply, ref: 02b05ffe54cf2cf845642bf0ae285705344633b5' \
-  'zeppe-lin/libpkgexec, ref: v2.1.0'
+  'zeppe-lin/libpkgbuild-image, ref: v1.0.1' \
+  'zeppe-lin/libpkgsource-plan, ref: v2.0.0' \
+  'zeppe-lin/libpkgbuild-plan, ref: v1.1.0' \
+  'zeppe-lin/libpkgapply, ref: v3.0.1' \
+  'zeppe-lin/libpkgexec, ref: v2.1.1'
 do
   count=$(grep -F "$expected" "$workflow" | wc -l)
   test "$count" -eq 2 || fail "current authority checkout is not pinned in both hosted matrices: $expected"

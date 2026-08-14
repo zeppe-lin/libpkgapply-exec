@@ -27,7 +27,7 @@ grep -Fq 'detail::lifecycle_execution_request(session)' \
 grep -Fq 'detail::model_access::result' "$root/src/result_codec.cpp"
 grep -Fq "'protocol/result_codec_roundtrip_test.cpp'" "$root/tests/meson.build"
 grep -Fq "'protocol/result_codec_refusal_test.cpp'" "$root/tests/meson.build"
-grep -Fq "version: ['>=2.1.0', '<3.0.0']" "$root/meson.build"
+grep -Fq "version: ['>=2.1.1', '<3.0.0']" "$root/meson.build"
 grep -Fq 'maximum_lifecycle_execution_result_encoding_size' \
   "$root/include/libpkgapply-exec/result_codec.h"
 grep -Fq 'lifecycle_execution_result_encoding_version = 1' \

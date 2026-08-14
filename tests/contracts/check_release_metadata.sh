@@ -24,8 +24,8 @@ require_dependency_range()
     fail "$variable does not require $range"
 }
 require "$root/meson.build" "version: '$version'"
-require_dependency_range libpkgapply_dep libpkgapply "['>=3.0.0', '<4.0.0']"
-require_dependency_range libpkgexec_dep libpkgexec "['>=2.1.0', '<3.0.0']"
+require_dependency_range libpkgapply_dep libpkgapply "['>=3.0.1', '<4.0.0']"
+require_dependency_range libpkgexec_dep libpkgexec "['>=2.1.1', '<3.0.0']"
 block=$(sed -n '/^public_deps = \[/,/^\]/p' "$root/src/meson.build")
 for dependency in libpkgapply_dep libpkgexec_dep; do
   count=$(printf '%s\n' "$block" | grep -Fxc "  $dependency," || true)
