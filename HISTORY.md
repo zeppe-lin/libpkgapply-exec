@@ -1,5 +1,19 @@
 # History
 
+## 3.0.2 — 2026-08-19
+
+- Rebind lifecycle execution to the published `libpkgapply 4.x` append-only
+  application authority generation.
+- Keep SONAME 3 and the reviewed 56-symbol ABI surface after qualifying every
+  application carrier retained by value; the generation-4 application request,
+  target identities, and all public `libpkgapply-exec` values preserve their
+  generation-3 x86-64 size and alignment.
+- Require `libpkgapply >= 4.0.0, < 5.0.0` in Meson, pkg-config metadata, hosted
+  qualification, and the shared-product SONAME audit.
+- Correct the stale shared-boundary audit so it verifies provider SONAME 3,
+  `libpkgapply.so.4`, and `libpkgexec.so.2` rather than historical generations.
+- Keep the lifecycle-result codec and its durable identity generation unchanged.
+
 ## 3.0.1 — 2026-08-14
 
 - Close lifecycle execution on the source-ABI-4 runtime authority.

@@ -57,6 +57,14 @@ grep -F "'abi-layout'" "$meson" >/dev/null || {
   echo 'missing ABI layout contract registration' >&2
   exit 1
 }
+grep -F "'apply-abi-generation'" "$meson" >/dev/null || {
+  echo 'missing apply ABI generation contract registration' >&2
+  exit 1
+}
+[ -x "$root/tests/contracts/check_apply_abi_generation.sh" ] || {
+  echo 'missing executable apply ABI generation contract' >&2
+  exit 1
+}
 grep -F "'exec-abi-generation'" "$meson" >/dev/null || {
   echo 'missing exec ABI generation contract registration' >&2
   exit 1

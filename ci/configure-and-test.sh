@@ -83,7 +83,7 @@ meson compile -C "$build/product"
 meson test -C "$build/product" --no-rebuild --print-errorlogs
 meson install -C "$build/product"
 if [ "$link_mode" = shared ]; then
-  "$root/ci/audit-shared-boundary.sh" "$build/install/lib/libpkgapply-exec.so.2"
+  "$root/ci/audit-shared-boundary.sh" "$build/install/lib/libpkgapply-exec.so.3"
 fi
 
 consumer="$root/tests/installed/consumer.cpp"

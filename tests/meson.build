@@ -129,6 +129,14 @@ if library_kind == 'shared'
     suite: 'contract',
   )
 
+  apply_abi_generation = find_program('contracts/check_apply_abi_generation.sh')
+  test(
+    'apply-abi-generation',
+    apply_abi_generation,
+    args: [libpkgapply_exec],
+    suite: 'contract',
+  )
+
   exec_abi_generation = find_program('contracts/check_exec_abi_generation.sh')
   test(
     'exec-abi-generation',

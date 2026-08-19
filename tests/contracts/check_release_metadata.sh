@@ -24,7 +24,7 @@ require_dependency_range()
     fail "$variable does not require $range"
 }
 require "$root/meson.build" "version: '$version'"
-require_dependency_range libpkgapply_dep libpkgapply "['>=3.0.1', '<4.0.0']"
+require_dependency_range libpkgapply_dep libpkgapply "['>=4.0.0', '<5.0.0']"
 require_dependency_range libpkgexec_dep libpkgexec "['>=2.1.1', '<3.0.0']"
 block=$(sed -n '/^public_deps = \[/,/^\]/p' "$root/src/meson.build")
 for dependency in libpkgapply_dep libpkgexec_dep; do
@@ -38,6 +38,10 @@ require "$root/src/meson.build" "soversion: '3'"
 require "$root/src/meson.build" 'requires: public_deps,'
 require "$root/README.md" "# libpkgapply-exec $version"
 require "$root/HISTORY.md" "## $version —"
+require "$root/HISTORY.md" 'libpkgapply 4.x'
 require "$root/HISTORY.md" 'libpkgexec 2.x'
+require "$root/MIGRATION.md" '## 3.0.1 to 3.0.2'
+require "$root/MIGRATION.md" '`libpkgapply 4.0.0`'
+require "$root/MIGRATION.md" '`libpkgapply-exec.so.3`'
 require "$root/man/meson.build" 'libpkgapply_exec_result_codec.3'
 require "$root/src/meson.build" '../include/libpkgapply-exec/result_codec.h'

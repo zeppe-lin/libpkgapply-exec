@@ -16,7 +16,7 @@ for expected in \
   'zeppe-lin/libpkgbuild-image, ref: v1.0.1' \
   'zeppe-lin/libpkgsource-plan, ref: v2.0.0' \
   'zeppe-lin/libpkgbuild-plan, ref: v1.1.0' \
-  'zeppe-lin/libpkgapply, ref: v3.0.1' \
+  'zeppe-lin/libpkgapply, ref: v4.0.0' \
   'zeppe-lin/libpkgexec, ref: v2.1.1'
 do
   count=$(grep -F "$expected" "$workflow" | wc -l)
@@ -30,6 +30,16 @@ grep -F 'meson install -C "$build/product"' "$root/ci/configure-and-test.sh" >/d
   fail 'product is not staged before installed-consumer qualification'
 grep -F 'audit-shared-boundary.sh' "$root/ci/configure-and-test.sh" >/dev/null ||
   fail 'shared core SONAME boundary is not audited after staging'
+grep -F 'libpkgapply-exec.so.3' "$root/ci/configure-and-test.sh" >/dev/null ||
+  fail 'shared qualification does not audit the installed SONAME-3 product'
+! grep -F 'libpkgapply-exec.so.2' "$root/ci/configure-and-test.sh" >/dev/null ||
+  fail 'shared qualification still audits the obsolete SONAME-2 path'
+grep -F 'Library soname: [libpkgapply-exec.so.3]' "$root/ci/audit-shared-boundary.sh" >/dev/null ||
+  fail 'shared audit does not require provider SONAME 3'
+grep -F "grep -Fx 'libpkgapply.so.4'" "$root/ci/audit-shared-boundary.sh" >/dev/null ||
+  fail 'shared audit does not require libpkgapply.so.4'
+grep -F "grep -Fx 'libpkgexec.so.2'" "$root/ci/audit-shared-boundary.sh" >/dev/null ||
+  fail 'shared audit does not require libpkgexec.so.2'
 grep -F 'pkg-config --static --libs libpkgapply-exec' "$root/ci/configure-and-test.sh" >/dev/null ||
   fail 'static installed pkg-config closure is not qualified'
 grep -F 'pkgapply_exec::derive(application.install)' "$root/tests/installed/consumer.cpp" >/dev/null ||

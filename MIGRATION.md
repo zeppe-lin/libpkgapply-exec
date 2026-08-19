@@ -34,3 +34,11 @@ Rebuild every consumer. `admitted_lifecycle_session` retains the corrected
 `libpkgapply 3.0.0` application request by value, so the loader ABI advances to
 `libpkgapply-exec.so.2`. Lifecycle-node and result-record protocols remain at
 generation 1; no durable lifecycle record format changed.
+
+## 3.0.1 to 3.0.2
+
+Rebuild consumers against `libpkgapply 4.0.0`. The application-4 protocol
+redesign changes the application provider ABI and SONAME, but the application
+request and identity carriers retained by `libpkgapply-exec` preserve their
+layout. `libpkgapply-exec` therefore remains `libpkgapply-exec.so.3`; no
+lifecycle-result durable record conversion is required.
